@@ -17,3 +17,6 @@ Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 # Use the tab key to open the auto complete menu.
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+
+# Use by default the history list view
+Set-PSReadLineOption -PredictionViewStyle ListView
