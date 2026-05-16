@@ -1,7 +1,7 @@
 function Backup-Postgres {
   param(
     [Parameter(Mandatory = $true)]
-    [string]$Name
+    [string]$Name,
 
     # Docker tag of PostgreSQL:
     [string]$PostgresVersion = "latest" 
