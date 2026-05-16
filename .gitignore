@@ -1,3 +1,9 @@
-Modules
-Scripts
+# Auto-generated PowerShell folders:
+**/Modules
+**/Scripts
+
+# Environment variables:
 .env
+
+# PostgreSQL backups:
+**/PostgresBackups
