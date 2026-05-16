@@ -2,6 +2,9 @@ function Backup-Postgres {
   param(
     [Parameter(Mandatory = $true)]
     [string]$Name
+
+    # Docker tag of PostgreSQL:
+    [string]$PostgresVersion = "latest" 
   )
 
   # Get or create the backup directory:
@@ -18,7 +21,7 @@ function Backup-Postgres {
   # Run `pg_dump` with Docker:
   docker run --rm `
     -v "${backupDirectory}:/backups" `
-    postgres:latest `
+    "postgres:$PostgresVersion" `
     pg_dump `
       --format=custom `
       --verbose `

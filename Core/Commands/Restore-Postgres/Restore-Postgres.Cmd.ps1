@@ -1,4 +1,9 @@
 function Restore-Postgres {
+  param(
+    # Docker tag of PostgreSQL:
+    [string]$PostgresVersion = "latest"
+  )
+
   # Get or create the backup directory:
   $profileDirectory = [System.IO.Path]::GetDirectoryName($PROFILE)
   $backupDirectory = Join-Path $profileDirectory "PostgresBackups"
@@ -30,7 +35,7 @@ function Restore-Postgres {
   # Run `pg_restore` with Docker:
   docker run --rm `
     -v "${backupDirectory}:/backups" `
-    postgres:latest `
+    "postgres:$PostgresVersion" `
     pg_restore `
       --verbose `
       --clean `
