@@ -17,7 +17,7 @@ Everything should work! 🎉
 
 ## Features
 - [Zoxide](https://github.com/ajeetdsouza/zoxide): efficient file navigation
-- [Posh-Git](https://github.com/dahlbyk/posh-git): git support
+- Lightweight git prompt (same rendering as [Posh-Git](https://github.com/dahlbyk/posh-git), loaded on demand for tab-completion only)
 - Auto-completion
 - Base64 encode/decode functions (`btoa`, `atob`)
 - Command line environment variable for every OS `we PORT=3000 pnpm run dev`

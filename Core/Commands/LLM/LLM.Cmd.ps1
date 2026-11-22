@@ -1,9 +1,8 @@
-. "$PSScriptRoot\..\Save-Module\Save-Module.Cmd.ps1"
-
-$moduleName = "simplysql"
-Save-Module $moduleName
-
 function LLM {
+  # The SimplySQL module is only needed here, so it is imported on first use
+  # instead of at every shell startup.
+  Save-Module simplysql
+
   $databasePath = "D:\Multimédia\Documents\PowerShell\database.sqlite"
   Open-SQLiteConnection -ConnectionString "Data Source=$databasePath;Version=3;"
 

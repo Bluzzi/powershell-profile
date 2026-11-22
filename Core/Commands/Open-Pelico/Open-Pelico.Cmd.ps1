@@ -1,30 +1,24 @@
-enum PelicoWebsite {
-  App
-  Ibis
-  Flamingo
-  Shoebill
-}
-
 function Open-Pelico {
   param (
     [Parameter(Mandatory = $True)]
-    [PelicoWebsite] $Target
+    [ValidateSet('App', 'Ibis', 'Flamingo', 'Shoebill')]
+    [string] $Target
   )
 
   switch ($Target) {
-    ([PelicoWebsite]::App) {
+    'App' {
       $URL = "$env:PELICO_URL/ui"
     }
 
-    ([PelicoWebsite]::Ibis) {
+    'Ibis' {
       $URL = "$env:PELICO_URL/ibis/api/playground"
     }
 
-    ([PelicoWebsite]::Flamingo) {
+    'Flamingo' {
       $URL = "$env:PELICO_URL/flamingo/api/graphql"
     }
 
-    ([PelicoWebsite]::Shoebill) {
+    'Shoebill' {
       $URL = "$env:PELICO_URL/shoebill/api/graphql/graphql"
     }
 

@@ -2,13 +2,16 @@ $profileDirectory = [System.IO.Path]::GetDirectoryName($PROFILE)
 $envFilePath = Join-Path -Path $profileDirectory -ChildPath ".env"
 
 if (Test-Path $envFilePath) {
-  Get-Content $envFilePath | ForEach-Object {
-    $name, $value = $_.split('=')
+  $envLines = [System.IO.File]::ReadAllLines($envFilePath)
+
+  foreach ($line in $envLines) {
+    # Split on the first '=' only, so values containing '=' are preserved.
+    $name, $value = $line.Split('=', 2)
 
     if ([string]::IsNullOrWhiteSpace($name) || $name.Contains('#')) {
       continue
     }
 
-    Set-Item -Path "env:$name" -Value $value
+    [System.Environment]::SetEnvironmentVariable($name, $value)
   }
 }

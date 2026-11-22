@@ -4,7 +4,7 @@ $CommandsPath = "$PSScriptRoot\Core\Commands"
 foreach ($FolderPath in Get-ChildItem -Path $CommandsPath -Directory) {
   $FolderName = Split-Path -Path $FolderPath -Leaf
 
-  if (!(Test-Path -Path "$FolderPath\$FolderName.Cmd.ps1" -PathType Leaf)) { return }
+  if (!(Test-Path -Path "$FolderPath\$FolderName.Cmd.ps1" -PathType Leaf)) { continue }
 
   . "$FolderPath\$FolderName.Cmd.ps1"
 }

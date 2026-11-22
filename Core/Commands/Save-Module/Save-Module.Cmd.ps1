@@ -8,10 +8,12 @@ function Save-Module {
     [string] $ModuleName
   )
 
-  if (Get-Module -ListAvailable -Name $moduleName) {
-    Import-Module -Name $moduleName
-  } else {
-    Install-Module -Name $moduleName -Force
-    Import-Module -Name $moduleName
+  # Fast path: import directly. Get-Module -ListAvailable would scan every directory
+  # in $env:PSModulePath, which is noticeable at shell startup.
+  Import-Module -Name $ModuleName -ErrorAction SilentlyContinue
+
+  if (!(Get-Module -Name $ModuleName -ErrorAction SilentlyContinue)) {
+    Install-Module -Name $ModuleName -Force
+    Import-Module -Name $ModuleName
   }
 }
