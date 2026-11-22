@@ -1,3 +1,9 @@
+# Applies only in a real interactive console: in redirected runs (pwsh -Command,
+# scripts, editors, CI), loading PSReadLine costs ~250 ms for nothing and the options
+# fail with "invalid handle". In an interactive session PSReadLine is loaded by the
+# host anyway, so nothing is lost.
+if ([Console]::IsInputRedirected -or [Console]::IsOutputRedirected) { return }
+
 # Prevents duplicates from being saved in the command history.
 Set-PSReadLineOption -HistoryNoDuplicates
 

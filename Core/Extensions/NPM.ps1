@@ -1,6 +1,21 @@
 # NPM:
-$moduleName = "npm-completion"
-Save-Module $moduleName
+# The npm-completion module only registers argument completers, so it is loaded
+# lazily on the first <Tab> on a npm command instead of at every shell startup.
+# The stub returns nothing: the completer registered by the module itself provides
+# the completions without duplicates.
+$script:NpmCompletionLoaded = $false
+Register-ArgumentCompleter -CommandName npm, npm.cmd -Native -ScriptBlock {
+  param(
+    $WordToComplete,
+    $CommandAst,
+    $CursorPosition
+  )
+
+  if (!$script:NpmCompletionLoaded) {
+    $script:NpmCompletionLoaded = $true
+    Save-Module npm-completion
+  }
+}
 
 # PNPM:
 Register-ArgumentCompleter -CommandName 'pnpm' -ScriptBlock {
